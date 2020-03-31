@@ -1,12 +1,11 @@
 from itertools import permutations
-
+    # ELSE   
+    #     'DOES NOT HOLD'
 fd_query_template = """
 
 SELECT '{R}: {A} --> {B}' AS FD,
     CASE WHEN COUNT(*) = 0 THEN
         'HOLDS'
-    ELSE   
-        'DOES NOT HOLD'
     END AS VALIDITY
 FROM (
     SELECT {A}
@@ -46,7 +45,7 @@ mvdtables = [
 ]
 
 def fdcheck():
-    with open("FDcheck.sql", "w") as myfile:
+    with open("FDcheck1.sql", "w") as myfile:
         for table, attributes in tables:
             for a, b in permutations(attributes, 2):
                 query = fd_query_template.format(R=table, A=a, B=b)
@@ -63,5 +62,5 @@ def mvdcheck():
 
 
 
-# fdcheck()
-mvdcheck()
+fdcheck()
+# mvdcheck()

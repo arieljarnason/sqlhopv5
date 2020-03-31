@@ -17,7 +17,7 @@ original relations.
 
 TABLES
 
-Rentals: 
+RENTALS: 
 
 PID (primarykey)
 HID (primarykey)
@@ -27,9 +27,15 @@ HS
 HZ
 HC
 
+Functional dependencies:
 
+PID -> PN
+HID -> HS
+HID -> HZ
+HID -> HC
+HZ -> HC
 
-Coffees (check mvd):
+COFFEES (check mvd):
 
 DID  (primarykey)
 HID (primarykey)
@@ -39,7 +45,20 @@ DS
 CN
 CM
 
-Projects (check mvd):
+Functional Dependencies: 
+
+DID -> DN
+DID -> DS
+CID -> CN
+CID -> CM
+
+Multivalued Dependencies:
+
+DID -> HID, CID
+DID -> CID, HID
+
+
+PROJECTS (check mvd):
 
 ID (primarykey)
 PID (primarykey)
@@ -49,7 +68,20 @@ PN
 MID
 MN
 
-Customers:
+Functional Dependencies:
+
+ID -> MID
+ID -> MN
+PID -> PN
+SID -> SN (use)
+SN -> SID (dont use)
+MID -> MN (unsure)
+MN -> MID (unsure)
+
+Multivalued dependencies: 
+null
+
+CUSTOMERS:
 
 CID (primarykey)
 CN
@@ -59,3 +91,10 @@ CZ
 CC
 EID
 
+CID -> CN
+CID -> CS
+CID -> CNr
+CID -> CZ
+CID -> CC
+CID -> EID
+CZ -> CC
