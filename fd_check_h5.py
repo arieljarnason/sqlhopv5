@@ -16,11 +16,33 @@ FROM (
 ) X;
 """
 
+mvd_query_template = """
+SELECT
+    '{A} ->> ({B}, {D}) in {R}' AS Relation,
+    CASE WHEN COUNT(*) = 0 THEN
+        'MAYBE MVD'
+    ELSE
+        'NO MVD'
+    END AS MVD
+FROM (
+    SELECT {A}
+    FROM {R}
+    GROUP BY {A}
+    HAVING COUNT(*) > 1
+        AND COUNT(*) <> COUNT(DISTINCT {B}) * COUNT(DISTINCT {D})
+) X;
+"""
+
 tables = [
     ("Rentals", ("PID", "HID", "PN", "S", "HS", "HZ", "HC")),
     ("Coffees", ("DID", "HID", "CID", "DN", "DS", "CN", "CM")),
     ("Projects", ("ID", "PID", "SID", "SN", "PN", "MID", "MN")),
     ("Customers", ("CID", "CN", "CS", "CNr", "CZ", "CC", "EID")),
+]
+
+mvdtables = [
+    ("Coffees", ("DID", "HID", "CID", "DN", "DS", "CN", "CM")),
+    ("Projects", ("ID", "PID", "SID", "SN", "PN", "MID", "MN")),
 ]
 
 def fdcheck():
@@ -31,4 +53,15 @@ def fdcheck():
                 # print(query)
                 myfile.write(query)
 
-fdcheck()
+def mvdcheck():
+    with open("MVDcheck.sql", "w") as myfile:
+        for table, attributes in mvdtables:
+            for a, b, d in permutations(attributes, 3):
+                query = mvd_query_template.format(R=table, A=a, B=b, D=d)
+                # print(query)   
+                myfile.write(query)             
+
+
+
+# fdcheck()
+mvdcheck()

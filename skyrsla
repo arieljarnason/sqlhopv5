@@ -1,0 +1,61 @@
+a) find these dependencies 
+b) use them to guide the decomposition of the relations
+
+For each relation, you must determine the following:
+1) All the (functional and multi-valued) dependencies represented in the relation (based
+on the assumptions above);
+2) All the keys of the relation (based on the detected dependencies);
+3) The minimal cover of the set of functional dependencies; and
+4) The current normal form of the relation.
+Then you must decompose the relation until each sub-relation is in either 3NF or BCNF,
+as well as in 4NF, while preserving all FDs of the minimal cover.
+For each relation resulting from the decomposition, you must determine the same four
+items as above.
+You must document all these steps and outcomes and write a report. Then you must
+create the resulting tables and populate them, by extracting the relevant data from the
+original relations.
+
+TABLES
+
+Rentals: 
+
+PID (primarykey)
+HID (primarykey)
+PN
+S
+HS
+HZ
+HC
+
+
+
+Coffees (check mvd):
+
+DID  (primarykey)
+HID (primarykey)
+CID (primarykey)
+DN
+DS
+CN
+CM
+
+Projects (check mvd):
+
+ID (primarykey)
+PID (primarykey)
+SID (primarykey)
+SN
+PN
+MID
+MN
+
+Customers:
+
+CID (primarykey)
+CN
+CS
+CNr
+CZ
+CC
+EID
+

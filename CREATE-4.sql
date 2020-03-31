@@ -14,6 +14,7 @@ CREATE TABLE Rentals (
        PRIMARY KEY (PID, HID)
 );
 
+--check mvd
 CREATE TABLE Coffees (
        DID INTEGER NOT NULL,
        HID INTEGER NOT NULL, 
@@ -25,6 +26,7 @@ CREATE TABLE Coffees (
        PRIMARY KEY (DID, HID, CID)
 );
 
+--check mvd
 CREATE TABLE Projects (
        ID INTEGER NOT NULL,
        PID INTEGER NOT NULL, 
